@@ -4,7 +4,7 @@ namespace App\Model;
 
 class Produto{
 
-    private $cod, $nome, $descricao, $quantidade;
+    private $cod, $nome, $descricao, $quantidade, $valor;
 
     public function getCod(){
         return $this->cod;
@@ -39,6 +39,13 @@ class Produto{
         $this->quantidade = $quantidade;
     }
 
+    public function getValor(){
+        return $this->valor;
+    }
+
+    public function setValor($valor){
+        $this->valor = $valor;
+    }
 
 
 

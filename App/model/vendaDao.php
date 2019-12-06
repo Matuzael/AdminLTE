@@ -2,16 +2,17 @@
 
 namespace App\Model; 
 
-class FuncionarioDao{
+class VendaDao{
 
-    public function create(Funcionario $f){
+    public function create(Venda $v){
 
-        $sql = 'INSERT INTO funcionarios(nome,email,senha) VALUES (?,?,?)';
+        $sql = 'INSERT INTO vendas(cliente,produto,quantidade,valor) VALUES (?,?,?,?)';
         
         $stmt = Conexao::getConn()->prepare($sql);
-        $stmt->bindValue(1, $f->getNome());
-        $stmt->bindValue(2, $f->getEmail());
-        $stmt->bindValue(3, $f->getSenha());
+        $stmt->bindValue(1, $v->getCliente());
+        $stmt->bindValue(2, $v->getProduto());
+        $stmt->bindValue(3, $v->getQuantidade());
+        $stmt->bindValue(4, $v->getValor());
        
 
         $stmt->execute();
@@ -20,7 +21,7 @@ class FuncionarioDao{
 
     public function read(){
 
-        $sql = 'SELECT * FROM funcionarios';
+        $sql = 'SELECT * FROM vendas';
 
         $stmt = Conexao::getConn()->prepare($sql);
 
@@ -37,20 +38,22 @@ class FuncionarioDao{
 
     }
 
-    public function update(Funcionario $f){
-        $sql = 'UPDATE funcionarios set nome=?, email=?, senha=? WHERE id=?';
+    public function update(Vendas $v){
+        $sql = 'UPDATE vendas set cliente=?, produto=?, quantidade=?, valor=? WHERE idVenda=? ';
 
         $stmt = Conexao::getConn()->prepare($sql);
-        $stmt->bindValue(1, $f->getNome());
-        $stmt->bindValue(2, $f->getEmail());
-        $stmt->bindValue(3, $f->getSenha());
-        $stmt->bindValue(4, $f->getId());
+        $stmt->bindValue(1, $v->getCliente());
+        $stmt->bindValue(2, $v->getProduto());
+        $stmt->bindValue(3, $v->getQuantidade());
+        $stmt->bindValue(4, $v->getValor());
+        $stmt->bindValue(5, $v->getIdVenda());
+
         $stmt->execute();
     }
 
     public function delete($id){
 
-        $sql = 'DELETE FROM funcionarios WHERE id=?';
+        $sql = 'DELETE FROM vendas WHERE idVenda=?';
 
         $stmt = Conexao::getConn()->prepare($sql);
         $stmt->bindValue(1,$id);
@@ -59,14 +62,12 @@ class FuncionarioDao{
 
     }
 
-    
     public function readOne($id){
 
-        $sql = 'SELECT * FROM funcionarios WHERE id=?';
+        $sql = 'SELECT * FROM vendas WHERE idVenda=? ';
 
         $stmt = Conexao::getConn()->prepare($sql);
         $stmt->bindValue(1,$id);
-
         $stmt->execute();
 
         if($stmt->rowCount()> 0):
@@ -78,6 +79,6 @@ class FuncionarioDao{
             return [];
         endif;
 
-    }
 
+}
 }

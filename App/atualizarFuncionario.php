@@ -1,9 +1,20 @@
+<?php
+session_start(); 
+ require_once '../vendor/autoload.php';
+$FuncionarioDao = new \App\Model\FuncionarioDao();
+$id = $_GET['id'];
+
+$funcionario = $FuncionarioDao->readOne($id);
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>OI| Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -48,11 +59,7 @@
           <img src="img/usuario.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?php 
-          session_start();
-          echo $_SESSION['nome'];
-          ?>
-           </a>
+          <a href="#" class="d-block"><?php echo $_SESSION['nome'] ?></a>
         </div>
       </div>
 
@@ -123,7 +130,7 @@
                 </a>
               </li>
               </ul>
-
+              
               <li class="nav-item has-treeview ">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -173,7 +180,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark"> <strong> Cadastro de Funcionários </strong></h1>
+            <h1 class="m-0 text-dark"> <strong> Atualização dos dados de Funcionários </strong></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -197,26 +204,36 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" method="POST" action="controllers/addFuncionario.php">
+              <?php echo '<form role="form" method="POST" action="controllers/updateFuncionario.php?id=';
+              echo $funcionario[0]['id'];  
+              echo '">';
+
+              ?>
                 <div class="card-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nome</label>
-                        <input name="nome" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nome">
+                        <?php echo '<input value="';
+                        echo $funcionario[0]['nome'];
+                        echo '" name="nome" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nome">' ?>
                       </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Email</label>
-                    <input name="email" type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    <?php echo '<input value="';
+                    echo $funcionario[0]['email'];
+                    echo '" name="email" type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">' ?>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Senha</label>
-                    <input name="senha" type="text" class="form-control" id="exampleInputPassword1" placeholder="Senha">
+                    <?php echo '<input value="';
+                    echo $funcionario[0]['senha'];
+                    echo '" name="senha" type="text" class="form-control" id="exampleInputPassword1" placeholder="Senha">'; ?>
                   </div>
                  
                 </div>
          
               <!-- /.card-body -->
               <div class="card-footer clearfix">
-                <button type="submit" class="btn btn-warning float-right"><i class="fas fa-plus"></i>Cadastrar Produto</button>
+                <button type="submit" class="btn btn-warning float-right"><i class="fas fa-plus"></i>Atualizar dados do funcionário</button>
               </div>
             </div>
             <!-- /.card -->
@@ -246,7 +263,7 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-
+  >
   </footer>
 
   <!-- Control Sidebar -->

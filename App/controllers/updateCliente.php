@@ -1,23 +1,23 @@
 <?php
-
 require_once '../../vendor/autoload.php';
 
 $cliente = new App\Model\Cliente();
 $clienteDao = new App\Model\ClienteDao();
 
-echo "<pre>". var_dump($_POST)."</pre>";
+
 
 $nome = $_POST['nome'];
 $email  = $_POST['email'];
 $cpf = $_POST['cpf'];
-
+$id = $_GET['id'];
 
 $cliente->setNome($nome);
 $cliente->setEmail($email);
 $cliente->setCpf($cpf);
+$cliente->setId($id);
 
-$clienteDao->create($cliente);
+$clienteDao->update($cliente);
 
-header("Location: ../cadastroCliente.php");
+header("Location: ../listarCliente.php");
 
 ?>

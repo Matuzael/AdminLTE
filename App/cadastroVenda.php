@@ -1,3 +1,11 @@
+<?php
+session_start(); 
+
+require_once "../vendor/autoload.php";
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,14 +38,14 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
- 
+
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="img/moeda.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">Controle de Vendas</span>
+      <span class="brand-text font-weight-light">AdminLTE 3</span>
     </a>
 
     <!-- Sidebar -->
@@ -45,14 +53,12 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="img/usuario.png" class="img-circle elevation-2" alt="User Image">
+          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?php 
-          session_start();
+          <a href="#" class="d-block"> <?php 
           echo $_SESSION['nome'];
-          ?>
-           </a>
+          ?></a>
         </div>
       </div>
 
@@ -73,7 +79,7 @@
             
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./cadastroCliente.php" class="nav-link ">
+                <a href="./cadastroCliente.php" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Cliente</p>
                 </a>
@@ -81,13 +87,13 @@
               <li class="nav-item">
                 <a href="./cadastroProduto.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Produto </p>
+                  <p>Produto</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./cadastroFuncionario.php" class="nav-link active">
+                <a href="./cadastroFuncionario.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Funcionário </p>
+                  <p>Funcionário</p>
                 </a>
               </li>
             </ul>
@@ -149,16 +155,51 @@
               </li>
               </ul>  
 
+              <li class="nav-item has-treeview ">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Vendas
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+
+            
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./cadastroVenda.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Nova venda </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./listarVenda.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Listar Vendas </p>
+                </a>
+              </li>
+              </ul>  
+
+              
+      
+              
+              
+
+
               <li class="nav-item">
             <a href="controllers/deslogar.php" class="nav-link">
               <i class="nav-icon far fa-circle text-danger"></i>
-             <p class="text">Encerrar Sessão </p>
+              <p class="text"> Encerrar Sessão </p>
             </a>
           </li>
 
-         
-              
-              
+
+
+
+
+
+
+        
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -173,7 +214,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark"> <strong> Cadastro de Funcionários </strong></h1>
+            <h1 class="m-0 text-dark"><strong>Nova Venda </strong></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -191,32 +232,59 @@
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="col-lg-8" style="margin:auto;">
-          <div class="card card-warning">
+          <div class="card card-dark">
               <div class="card-header">
                 <h3 class="card-title">Insira as informações</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" method="POST" action="controllers/addFuncionario.php">
+              <form role="form" method="POST" action="controllers/addVenda.php">
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Nome</label>
-                        <input name="nome" type="text" class="form-control" id="exampleInputEmail1" placeholder="Nome">
+                    <label>Select</label>
+                        <select class="form-control" name="cliente">
+
+                        <?php
+                                $ClienteDao = new \App\Model\ClienteDao();
+                                $clientes = $ClienteDao->read();
+
+                                  foreach($clientes as $cliente):
+                                    echo '<option>'.$cliente['nome'].'</option>';
+                                  endforeach;
+                                ?>
+                        </select>
                       </div>
+                      
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Email</label>
-                    <input name="email" type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                  <label>Select</label>
+                        <select class="form-control" name="produto">
+
+                        <?php
+                                $ProdutoDao = new \App\Model\produtoDao();
+                                $produtos = $ProdutoDao->read();
+
+                                  foreach($produtos as $produto):
+                                    echo '<option>'.$produto['nome'].'</option>';
+                                  endforeach;
+                                ?>
+                        </select>
                   </div>
+
                   <div class="form-group">
-                    <label for="exampleInputPassword1">Senha</label>
-                    <input name="senha" type="text" class="form-control" id="exampleInputPassword1" placeholder="Senha">
+                    <label for="exampleInputPassword1">Quantidade</label>
+                    <input name="quantidade" min="0"  type="number" class="form-control" id="exampleInputPassword1" placeholder="Quantidade">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Valor</label>
+                    <input name="valor" type="text" class="form-control" id="exampleInputPassword1" placeholder="Valor">
                   </div>
                  
                 </div>
          
               <!-- /.card-body -->
               <div class="card-footer clearfix">
-                <button type="submit" class="btn btn-warning float-right"><i class="fas fa-plus"></i>Cadastrar Produto</button>
+                <button type="submit" class="btn btn-dark float-right"><i class="fas fa-plus"></i>Cadastrar Venda</button>
               </div>
             </div>
             <!-- /.card -->
@@ -246,7 +314,7 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-
+  
   </footer>
 
   <!-- Control Sidebar -->

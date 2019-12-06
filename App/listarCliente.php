@@ -1,3 +1,7 @@
+<?php 
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +21,8 @@
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-  
+
+
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -37,7 +42,9 @@
           <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Déborah</a>
+          <a href="#" class="d-block"><?php 
+          echo $_SESSION['nome'];
+          ?></a>
         </div>
       </div>
 
@@ -133,9 +140,9 @@
                 </a>
               </li>
               </ul>  
-            
+
             <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="controllers/deslogar.php" class="nav-link">
               <i class="nav-icon far fa-circle text-danger"></i>
               <p class="text">Encerrar Sessão</p>
             </a>
@@ -194,6 +201,7 @@
                       <th>ID</th>
                       <th>Nome</th>
                       <th>Email</th>
+                      <th>CPF</th>
                       <th>Ações</th>
                 
               
@@ -203,20 +211,21 @@
 
               <?php 
                 require_once '../vendor/autoload.php';
-                $FuncionarioDao = new \App\Model\FuncionarioDao();
-                $funcionarios = $FuncionarioDao->read();
+                $ClientesDao = new \App\Model\ClienteDao();
+                $clientes = $ClientesDao->read();
 
-                foreach($funcionarios as $funcionario):
+                foreach($clientes as $cliente):
                 echo   '<tr>
-                <td>'.$funcionario['id'].'</td>
-                <td>'.$funcionario['nome'].'</td>
-                <td>'.$funcionario['email'].'</td>
-                <td><a href=controllers/removerFuncionario.php?id=';
-                echo $funcionario['id'];
+                <td>'.$cliente['id'].'</td>
+                <td>'.$cliente['nome'].'</td>
+                <td>'.$cliente['email'].'</td>
+                <td>'.$cliente['cpf'].'</td>
+                <td><a href=controllers/removerCliente.php?id=';
+                echo $cliente['id'];
               echo'> <img src="img/remover.png"/></a>
 
-              <a href=atualizarFuncionario.php?id=';
-              echo $funcionario['id'];
+              <a href=atualizarCliente.php?id=';
+              echo $cliente['id'];
             echo'> <img src="img/atualizar.png"/></a>
               </td>
                 </tr>';
@@ -238,7 +247,7 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
- 
+  
   </footer>
 
   <!-- Control Sidebar -->

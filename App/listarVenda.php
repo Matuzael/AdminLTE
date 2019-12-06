@@ -1,3 +1,7 @@
+<?php 
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +22,7 @@
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
   
+
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -37,7 +42,9 @@
           <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Déborah</a>
+          <a href="#" class="d-block"><?php 
+          echo $_SESSION['nome'];
+          ?></a>
         </div>
       </div>
 
@@ -133,9 +140,9 @@
                 </a>
               </li>
               </ul>  
-            
+
             <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="controllers/deslogar.php" class="nav-link">
               <i class="nav-icon far fa-circle text-danger"></i>
               <p class="text">Encerrar Sessão</p>
             </a>
@@ -156,7 +163,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Listagem de Funcionários</h1>
+            <h1>Listagem de Vendas</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -191,10 +198,11 @@
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>Nome</th>
-                      <th>Email</th>
-                      <th>Ações</th>
+                      <th>ID Venda</th>
+                      <th>Cliente</th>
+                      <th>Produto</th>
+                      <th>Quantidade</th>
+                      <th>Valor</th>
                 
               
                     </tr>
@@ -203,21 +211,23 @@
 
               <?php 
                 require_once '../vendor/autoload.php';
-                $FuncionarioDao = new \App\Model\FuncionarioDao();
-                $funcionarios = $FuncionarioDao->read();
+                $VendasDao = new \App\Model\VendaDao();
+                $vendas = $VendasDao->read();
 
-                foreach($funcionarios as $funcionario):
+                foreach($vendas as $venda):
                 echo   '<tr>
-                <td>'.$funcionario['id'].'</td>
-                <td>'.$funcionario['nome'].'</td>
-                <td>'.$funcionario['email'].'</td>
-                <td><a href=controllers/removerFuncionario.php?id=';
-                echo $funcionario['id'];
+                <td>'.$venda['idVenda'].'</td>
+                <td>'.$venda['cliente'].'</td>
+                <td>'.$venda['produto'].'</td>
+                <td>'.$venda['quantidade'].'</td>
+                <td>'.$venda['valor'].'</td>
+                <td><a href=controllers/removerVenda.php?id=';
+                echo $venda['idVenda'];
               echo'> <img src="img/remover.png"/></a>
 
-              <a href=atualizarFuncionario.php?id=';
-              echo $funcionario['id'];
-            echo'> <img src="img/atualizar.png"/></a>
+              <a href=recibo.php?id=';
+              echo $venda['idVenda'];
+            echo'> <img src="img/pdf.png"/></a>
               </td>
                 </tr>';
                 endforeach;
@@ -238,7 +248,7 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
- 
+   
   </footer>
 
   <!-- Control Sidebar -->

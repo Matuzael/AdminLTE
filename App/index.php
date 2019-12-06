@@ -4,6 +4,25 @@
     header("Location: login.php");
   endif;
 
+require_once "../vendor/autoload.php";
+$clienteDao = new \App\Model\clienteDao();
+$clientes = $clienteDao->read();
+
+$ProdutoDao = new \App\Model\produtoDao();
+$produtos = $ProdutoDao->read();
+
+$VendaDao = new \App\Model\VendaDao();
+$vendas = $VendaDao->read();
+
+$caixa = 0;
+foreach($vendas as $venda):
+  $caixa += $venda['valor'];
+endforeach;
+
+
+
+
+
 ?>
 
 
@@ -44,9 +63,9 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      <img src="img/moeda.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">Controle de Vendas</span>
     </a>
 
     <!-- Sidebar -->
@@ -54,10 +73,12 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="img/usuario.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Déborah</a>
+          <a href="index.php" class="d-block"> <?php 
+          echo $_SESSION['nome'];
+          ?> </a>
         </div>
       </div>
 
@@ -70,7 +91,7 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview ">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+            <img src="img/add.png">
               <p>
                 Cadastro
                 <i class="right fas fa-angle-left"></i>
@@ -81,19 +102,21 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="./cadastroCliente.php" class="nav-link ">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class=""></i>
+                  <img src="img/cliente.png">
                   <p>Cliente</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="./cadastroProduto.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                
+                  <img src="img/produto.png">
                   <p>Produto </p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="./cadastroFuncionario.php" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                <img src="img/funcionario.png">
                   <p>Funcionário </p>
                 </a>
               </li>
@@ -102,7 +125,7 @@
 
           <li class="nav-item has-treeview ">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+            <img src="img/listar.png">
               <p>
                 Listar
                 <i class="right fas fa-angle-left"></i>
@@ -113,28 +136,53 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="./listarCliente.php" class="nav-link ">
-                  <i class="far fa-circle nav-icon"></i>
+                <img src="img/cliente.png">
                   <p>Cliente</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="./listarProduto.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <img src="img/produto.png">
                   <p>Produto </p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="./listarFuncionario.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <img src="img/funcionario.png">
                   <p>Funcionário </p>
                 </a>
               </li>
             </ul>
           </li>
 
+          <li class="nav-item has-treeview ">
+            <a href="#" class="nav-link">
+            <img src="img/vendas.png">
+              <p>
+                Vendas
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+
+            
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./cadastroVenda.php" class="nav-link">
+                <img src="img/nova-venda.png">
+                  <p>Nova venda </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./listarVenda.php" class="nav-link">
+                <img src="img/lista-vendas.png">
+                  <p>Listar Vendas </p>
+                </a>
+              </li>
+              </ul>  
+
           
 
-          <li class="nav-item">
+         <!-- <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
@@ -622,6 +670,7 @@
 
         </ul>
       </nav>
+-->
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
@@ -634,7 +683,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0 text-dark"> <strong> Tela Principal (precisa fazer) </strong></h1>
+            <h1 class="m-0 text-dark"> <strong> Tela Principal</strong></h1>
                <!-- Small Box (Stat card) -->
         <h5 class="mb-2 mt-4">Informações</h5>
         <div class="row">
@@ -642,15 +691,15 @@
             <!-- small card -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3><?php echo sizeof($vendas);?></h3>
 
                 <p>Total de Vendas</p>
               </div>
               <div class="icon">
                 <i class="fas fa-shopping-cart"></i>
               </div>
-              <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
+              <a href="listarVenda.php" class="small-box-footer">
+                Listar Vendas <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
           </div>
@@ -659,15 +708,15 @@
             <!-- small card -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3><?php echo $caixa;?><sup style="font-size: 20px"></sup></h3>
 
                 <p>Caixa</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
+              <a href="listarVenda.php" class="small-box-footer">
+                Listar Vendas <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
           </div>
@@ -676,15 +725,15 @@
             <!-- small card -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+                <h3><?php echo sizeof($clientes); ?></h3>
 
-                <p>Usuários Cadastrados</p>
+                <p>Clientes Cadastrados</p>
               </div>
               <div class="icon">
                 <i class="fas fa-user-plus"></i>
               </div>
-              <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
+              <a href="listarCliente.php" class="small-box-footer">
+                Listar Clientes <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
           </div>
@@ -693,15 +742,15 @@
             <!-- small card -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
+                <h3><?php echo sizeof($produtos);?></h3>
 
                 <p>Produtos Cadastrados</p>
               </div>
               <div class="icon">
                 <i class="fas fa-chart-pie"></i>
               </div>
-              <a href="#" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
+              <a href="listarProduto.php" class="small-box-footer">
+                Listar Produtos <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
           </div>
@@ -710,11 +759,9 @@
         <!-- /.row -->
             
           </div><!-- /.col -->
+
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
-            </ol>
+           
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -743,10 +790,7 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0.1-pre
+  
     </div>
   </footer>
 
