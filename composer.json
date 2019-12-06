@@ -27,5 +27,8 @@
   "license": "MIT",
   "support": {
     "issues": "https://github.com/ColorlibHQ/AdminLTE/issues"
+  },
+  "require": {
+    "mpdf/mpdf": "^8.0"
   }
 }
