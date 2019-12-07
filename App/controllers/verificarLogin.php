@@ -14,11 +14,19 @@ foreach($funcionarios as $credenciais):
         session_start();
         $_SESSION['nome'] = $credenciais['nome'];
         $_SESSION['id'] = $credenciais['id'];
+       
         header("Location: ../index.php");
+        break;
+  
     
     else:
-        //echo "Erro ao logar";
+        echo "Erro ao logar";
+        header("Location: ../login.php");
+    break;
+
+        
     endif;
+
     
   
 endforeach;

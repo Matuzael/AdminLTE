@@ -3,6 +3,10 @@ session_start();
 
 require_once "../vendor/autoload.php";
 
+if(!isset($_SESSION['nome'])):
+  header("Location: login.php");
+endif;
+
 ?>
 
 
@@ -11,7 +15,7 @@ require_once "../vendor/autoload.php";
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Controle de Vendas</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -42,10 +46,10 @@ require_once "../vendor/autoload.php";
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+    <a href="" class="brand-link">
+      <img src="img/moeda.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">Controle de Vendas</span>
     </a>
 
     <!-- Sidebar -->
@@ -53,23 +57,22 @@ require_once "../vendor/autoload.php";
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="img/usuario.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"> <?php 
+          <a href="index.php" class="d-block"> <?php 
           echo $_SESSION['nome'];
           ?></a>
         </div>
       </div>
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
+ <!-- Sidebar Menu -->
+ <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <img src="img/add.png">
               <p>
                 Cadastro
                 <i class="right fas fa-angle-left"></i>
@@ -79,20 +82,20 @@ require_once "../vendor/autoload.php";
             
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./cadastroCliente.php" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Cliente</p>
+                <a href="./cadastroCliente.php" class="nav-link">
+                <img src="img/cliente.png">
+                  <p>Cliente </p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./cadastroProduto.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Produto</p>
+                <a href="./cadastroProduto.php" class="nav-link active">
+                <img src="img/produto.png">
+                  <p>Produto </p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="./cadastroFuncionario.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <img src="img/funcionario.png">
                   <p>Funcionário</p>
                 </a>
               </li>
@@ -101,7 +104,7 @@ require_once "../vendor/autoload.php";
 
           <li class="nav-item has-treeview ">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+            <img src="img/listar.png">
               <p>
                 Listar
                 <i class="right fas fa-angle-left"></i>
@@ -112,27 +115,27 @@ require_once "../vendor/autoload.php";
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="./listarCliente.php" class="nav-link ">
-                  <i class="far fa-circle nav-icon"></i>
+                <img src="img/cliente.png">
                   <p>Cliente</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="./listarProduto.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <img src="img/produto.png">
                   <p>Produto </p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="./listarFuncionario.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Funcionário </p>
+                <img src="img/funcionario.png">
+                  <p>Funcionário </p> 
                 </a>
               </li>
-              </ul>
+            </ul>
 
-              <li class="nav-item has-treeview ">
+            <li class="nav-item has-treeview ">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+            <img src="img/vendas.png">
               <p>
                 Vendas
                 <i class="right fas fa-angle-left"></i>
@@ -143,63 +146,28 @@ require_once "../vendor/autoload.php";
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="./cadastroVenda.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <img src="img/nova-venda.png">
                   <p>Nova venda </p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="./listarVenda.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <img src="img/lista-vendas.png">
                   <p>Listar Vendas </p>
                 </a>
               </li>
               </ul>  
 
-              <li class="nav-item has-treeview ">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Vendas
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
+          
 
-            
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./cadastroVenda.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Nova venda </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./listarVenda.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Listar Vendas </p>
-                </a>
-              </li>
-              </ul>  
-
-              
-      
-              
-              
-
-
-              <li class="nav-item">
+            <li class="nav-item">
             <a href="controllers/deslogar.php" class="nav-link">
               <i class="nav-icon far fa-circle text-danger"></i>
-              <p class="text"> Encerrar Sessão </p>
+              <p class="text">Encerrar Sessão</p>
             </a>
           </li>
 
-
-
-
-
-
-
-        
+       
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -218,8 +186,7 @@ require_once "../vendor/autoload.php";
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+           
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -241,7 +208,7 @@ require_once "../vendor/autoload.php";
               <form role="form" method="POST" action="controllers/addVenda.php">
                 <div class="card-body">
                     <div class="form-group">
-                    <label>Select</label>
+                    <label>Cliente:</label>
                         <select class="form-control" name="cliente">
 
                         <?php
@@ -256,7 +223,7 @@ require_once "../vendor/autoload.php";
                       </div>
                       
                   <div class="form-group">
-                  <label>Select</label>
+                  <label>Produto</label>
                         <select class="form-control" name="produto">
 
                         <?php

@@ -18,6 +18,6 @@ $funcionario->setSenha($senha);
 
 $funcionarioDao->create($funcionario);
 
-header("Location: ../cadastrarFuncionario.php");
+header("Location: ../listarFuncionario.php");
 
 ?>

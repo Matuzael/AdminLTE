@@ -1,5 +1,9 @@
 <?php 
-session_start();
+  session_start();
+  if(!isset($_SESSION['nome'])):
+    header("Location: login.php");
+  endif;
+
 require_once "../vendor/autoload.php";
 $ClienteDao = new App\Model\ClienteDao();
 $id = $_GET['id'];
@@ -46,9 +50,9 @@ $cliente = $ClienteDao->readOne($id);
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      <img src="img/moeda.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">Controle de Vendas</span>
     </a>
 
     <!-- Sidebar -->
@@ -56,10 +60,10 @@ $cliente = $ClienteDao->readOne($id);
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="img/usuario.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"> <?php 
+          <a href="index.php" class="d-block"> <?php 
           echo $_SESSION['nome'];
           ?></a>
         </div>
@@ -70,9 +74,9 @@ $cliente = $ClienteDao->readOne($id);
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+          <li class="nav-item has-treeview menu">
+            <a href="#" class="nav-link">
+              <img src="img/add.png" />
               <p>
                 Cadastro
                 <i class="right fas fa-angle-left"></i>
@@ -82,20 +86,20 @@ $cliente = $ClienteDao->readOne($id);
             
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./cadastroCliente.php" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="./cadastroCliente.php" class="nav-link ">
+                <img src="img/cliente.png" />
                   <p>Cliente</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="./cadastroProduto.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <img src="img/produto.png" />
                   <p>Produto</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="./cadastroFuncionario.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <img src="img/funcionario.png" />
                   <p>Funcionário</p>
                 </a>
               </li>
@@ -104,7 +108,7 @@ $cliente = $ClienteDao->readOne($id);
 
           <li class="nav-item has-treeview ">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+            <img src="img/listar.png" />
               <p>
                 Listar
                 <i class="right fas fa-angle-left"></i>
@@ -115,19 +119,19 @@ $cliente = $ClienteDao->readOne($id);
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="./listarCliente.php" class="nav-link ">
-                  <i class="far fa-circle nav-icon"></i>
+                <img src="img/cliente.png" />
                   <p>Cliente</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="./listarProduto.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <img src="img/produto.png" />
                   <p>Produto </p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="./listarFuncionario.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <img src="img/funcionario.png" />
                   <p>Funcionário </p>
                 </a>
               </li>
@@ -135,7 +139,7 @@ $cliente = $ClienteDao->readOne($id);
 
               <li class="nav-item has-treeview ">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+            <img src="img/vendas.png" />
               <p>
                 Vendas
                 <i class="right fas fa-angle-left"></i>
@@ -146,13 +150,13 @@ $cliente = $ClienteDao->readOne($id);
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="./cadastroVenda.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <img src="img/nova-venda.png" />
                   <p>Nova venda </p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="./listarVenda.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <img src="img/lista-vendas.png" />
                   <p>Listar Vendas </p>
                 </a>
               </li>
@@ -190,8 +194,7 @@ $cliente = $ClienteDao->readOne($id);
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+         
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
