@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06-Dez-2019 às 20:35
+-- Tempo de geração: 09-Dez-2019 às 02:45
 -- Versão do servidor: 10.4.6-MariaDB
 -- versão do PHP: 7.3.9
 
@@ -40,8 +40,7 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id`, `nome`, `email`, `cpf`) VALUES
-(4, 'fernanda2', 'fernanda@deus.com.br', 12364644),
-(5, 'italoboydoido', 'italo@pb.com', 12345);
+(6, 'Fernanda ', 'fernanda@hotmail.com', 78945885);
 
 -- --------------------------------------------------------
 
@@ -61,7 +60,7 @@ CREATE TABLE `funcionarios` (
 --
 
 INSERT INTO `funcionarios` (`id`, `nome`, `email`, `senha`) VALUES
-(2, 'matuzael', 'matuzaeldias@hotmail.com', '12345');
+(6, 'Deborah', 'deborah@hotmail.com', '12345');
 
 -- --------------------------------------------------------
 
@@ -81,10 +80,7 @@ CREATE TABLE `produtos` (
 --
 
 INSERT INTO `produtos` (`cod`, `nome`, `descricao`, `quantidade`) VALUES
-(4, 'moto', 'grande', 10),
-(5, 'msdksmk', 'mlsdfmkne', 545),
-(6, 'mota', 'ruim', 5),
-(7, 'moto', 'dofjoe', 10);
+(8, 'Perfume', '500ml ', 50);
 
 -- --------------------------------------------------------
 
@@ -106,10 +102,7 @@ CREATE TABLE `vendas` (
 --
 
 INSERT INTO `vendas` (`idVenda`, `cliente`, `produto`, `quantidade`, `valor`, `data`) VALUES
-(5, 'debora4', 'carro', 10, 100, '2019-12-06 19:20:21'),
-(6, 'debora4', 'bolafodaa', 20, 60, '2019-12-06 19:20:21'),
-(7, 'fernanda2', 'carro', 10, 820, '2019-12-06 19:20:21'),
-(8, 'italoboydoido', 'mota', 2, 2000, '2019-12-06 19:20:21');
+(9, 'Fernanda', 'Perfume', 10, 72, '2019-12-07 18:43:45');
 
 --
 -- Índices para tabelas despejadas
@@ -147,25 +140,25 @@ ALTER TABLE `vendas`
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `funcionarios`
 --
 ALTER TABLE `funcionarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `cod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `cod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `vendas`
 --
 ALTER TABLE `vendas`
-  MODIFY `idVenda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idVenda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -29,7 +29,7 @@ endif; ?>
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index.php" class="brand-link">
-      <img src="../../dist/img/AdminLTELogo.png"
+      <img src="img/moeda.png"
            alt="AdminLTE Logo"
            class="brand-image img-circle elevation-3"
            style="opacity: .8">
@@ -214,7 +214,7 @@ endif; ?>
 
               <?php 
                 require_once '../vendor/autoload.php';
-                $produtoDao = new \App\Model\produtoDao();
+                $produtoDao = new \App\Model\ProdutoDao();
                 $produtos = $produtoDao->read();
 
                 foreach($produtos as $produto):
