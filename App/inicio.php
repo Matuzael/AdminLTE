@@ -1,4 +1,31 @@
+<?php 
+  session_start();
+require_once "../vendor/autoload.php";
 
+  if(!isset($_SESSION['nome'])):
+    header("Location: login.php");
+  endif;
+
+
+$clienteDao = new \App\Model\clienteDao();
+$clientes = $clienteDao->read();
+
+$ProdutoDao = new \App\Model\produtoDao();
+$produtos = $ProdutoDao->read();
+
+$VendaDao = new \App\Model\VendaDao();
+$vendas = $VendaDao->read();
+
+$caixa = 0;
+foreach($vendas as $venda):
+  $caixa += $venda['valor'];
+endforeach;
+
+
+
+
+
+?>
 
 
 <!DOCTYPE html>
