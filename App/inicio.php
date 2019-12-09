@@ -1,6 +1,6 @@
 <?php 
   session_start();
-require_once "../vendor/autoload.php";
+    require_once "../vendor/autoload.php";
 
   if(!isset($_SESSION['nome'])):
     header("Location: login.php");
