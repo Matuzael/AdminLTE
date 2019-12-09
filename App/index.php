@@ -1,10 +1,11 @@
 <?php 
+require_once "../vendor/autoload.php";
   session_start();
   if(!isset($_SESSION['nome'])):
     header("Location: login.php");
   endif;
 
-require_once "../vendor/autoload.php";
+
 $clienteDao = new \App\Model\clienteDao();
 $clientes = $clienteDao->read();
 
